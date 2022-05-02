@@ -28,6 +28,20 @@ import { Inventory } from 'src/models/inventory.model';
 import { InventoriesModule } from './inventories.module';
 import { Calendar } from 'src/models/calendar.model';
 import { CalendarsModule } from './calendars.module';
+import { Sale } from 'src/models/sale.model';
+import { SalesModule } from './sales.module';
+import { Shopping } from 'src/models/shopping.model';
+import { ShoppingsModule } from './shoppings.module';
+import { DetailApplicationService } from 'src/models/detail-application-service.model';
+import { DetailApplicationServiceModule } from './detail-application-service.module';
+import { DetailShopping } from 'src/models/detail-shopping.model';
+import { DetailShoppingsModule } from './detail-shoppings.module';
+import { ModuloVsRole } from 'src/models/modulo-vs-role.model';
+import { ModuloVsRoleModule } from './modulo-vs-role.module';
+import { Permission } from 'src/models/permission.model';
+import { PermissionsModule } from './permissions.module';
+import { RoleVsPermiso } from 'src/models/role-vs-permiso.model';
+import { RoleVsPermisoModule } from './role-vs-permiso.module';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -50,7 +64,14 @@ import { CalendarsModule } from './calendars.module';
       User,
       Application,
       Inventory,
-      Calendar],
+      Calendar,
+      Sale,
+      Shopping,
+      DetailApplicationService,
+      DetailShopping,
+      Permission,
+      ModuloVsRole,
+      RoleVsPermiso],
     autoLoadModels: true,
     synchronize: true,
   }),
@@ -66,7 +87,14 @@ import { CalendarsModule } from './calendars.module';
     UsersModule,
     ApplicationsModule,
     InventoriesModule,
-    CalendarsModule],
+    CalendarsModule,
+    SalesModule,
+    ShoppingsModule,
+    DetailApplicationServiceModule,
+    DetailShoppingsModule,
+    PermissionsModule,
+    ModuloVsRoleModule,
+    RoleVsPermisoModule],
   controllers: [AppController],
   providers: [AppService],
 })

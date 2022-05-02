@@ -2,6 +2,7 @@ import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from '
 import { Application } from './application.model';
 import { Calendar } from './calendar.model';
 import { Role } from './role.model'
+import { Sale } from './sale.model';
 
 @Table({
     engine: 'InnoDB',
@@ -100,4 +101,7 @@ export class User extends Model<User> {
 
     @HasMany(() => Calendar)
     calendars: Calendar[]
+
+    @HasMany(() => Sale)
+    sales: Sale[]
 }

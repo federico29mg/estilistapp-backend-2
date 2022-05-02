@@ -1,6 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
-import { DetailApplicationService } from './detail-application-service.model';
-import { ServiceStatus } from './service-status.model';
+import { ServiceStatus } from 'src/models/service-status.model';
 import { User } from './user.model';
 
 @Table({
@@ -8,72 +7,54 @@ import { User } from './user.model';
     charset: 'utf8mb4',
     collate: 'utf8mb4_unicode_ci',
     timestamps: false,
-    tableName: 'applications',
+    tableName: 'sales',
 })
-export class Application extends Model<Application> {
+export class Sale extends Model<Sale> {
     @Column({
         type: DataType.BIGINT({ length: 20 }).UNSIGNED,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
     })
-    id: bigint;
+    idventa: bigint;
 
     @Column({
-        type: DataType.DATE,
-        defaultValue: null,
-    })
-    fechasolicitud: Date;
-
-    @Column({
-        type: DataType.DATE,
-        allowNull: false,
-    })
-    fechaservicio: Date;
-
-    @Column({
-        type: DataType.DECIMAL(9, 0),
-        allowNull: false,
-    })
-    total: number;
-
-    @Column({
-        type: 'VARCHAR(255) COLLATE utf8mb4_unicode_ci',
+        type: 'DATE',
         allowNull: false
     })
-    modalidad: string;
-
-    @Column({
-        type: 'VARCHAR(255) COLLATE utf8mb4_unicode_ci',
-        defaultValue: null
-    })
-    direccion: string;
+    fechaservicio: Date;
 
     @ForeignKey(() => ServiceStatus)
     @Column({
         type: DataType.BIGINT({ length: 20 }).UNSIGNED,
-        allowNull: false,
+        allowNull: false
     })
     idestadoservicio: bigint;
 
     @BelongsTo(() => ServiceStatus, {
         onDelete: 'CASCADE',
-        onUpdate: 'RESTRICT'
+        onUpdate: 'CASCADE'
     })
     serviceStatus: ServiceStatus
 
     @ForeignKey(() => User)
     @Column({
         type: DataType.BIGINT({ length: 20 }).UNSIGNED,
-        allowNull: false,
+        allowNull: false
     })
     idusuario: bigint;
 
     @BelongsTo(() => User, {
         onDelete: 'CASCADE',
-        onUpdate: 'RESTRICT'
+        onUpdate: 'CASCADE'
     })
     user: User
+
+    @Column({
+        type: DataType.BIGINT({ length: 20 }).UNSIGNED,
+        defaultValue: null
+    })
+    idservicioproducto: bigint;
 
     @Column({
         type: 'TIMESTAMP NULL',
@@ -86,7 +67,4 @@ export class Application extends Model<Application> {
         defaultValue: null
     })
     updated_at: number;
-
-    @HasMany(() => DetailApplicationService)
-    detailApplicationService: DetailApplicationService[]
 }

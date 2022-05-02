@@ -1,4 +1,6 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { ModuloVsRole } from './modulo-vs-role.model';
+import { RoleVsPermiso } from './role-vs-permiso.model';
 import { User } from './user.model';
 
 @Table({
@@ -44,4 +46,10 @@ export class Role extends Model<Role> {
 
     @HasMany(() => User)
     users: User[]
+
+    @HasMany(() => ModuloVsRole)
+    moduloVsRole: ModuloVsRole[]
+
+    @HasMany(() => RoleVsPermiso)
+    roleVsPermiso: RoleVsPermiso
 }

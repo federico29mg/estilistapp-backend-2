@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Shopping } from './shopping.model';
 
 @Table({
     engine: 'InnoDB',
@@ -73,4 +74,7 @@ export class Provider extends Model<Provider> {
         defaultValue: null
     })
     updated_at: number;
+
+    @HasMany(() => Shopping)
+    shoppings: Shopping[]
 }

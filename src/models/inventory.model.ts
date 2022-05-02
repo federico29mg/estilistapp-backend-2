@@ -1,6 +1,8 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 import { Calendar } from './calendar.model';
 import { Category } from './category.model';
+import { DetailApplicationService } from './detail-application-service.model';
+import { DetailShopping } from './detail-shopping.model';
 
 @Table({
     engine: 'InnoDB',
@@ -82,4 +84,10 @@ export class Inventory extends Model<Inventory> {
 
     @HasMany(() => Calendar)
     calendars: Calendar[]
+
+    @HasMany(() => DetailApplicationService)
+    detailApplicationService: DetailApplicationService[]
+
+    @HasMany(() => DetailShopping)
+    detailShoppings: DetailShopping[]
 }

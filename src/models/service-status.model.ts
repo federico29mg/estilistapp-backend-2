@@ -1,5 +1,6 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { Application } from './application.model';
+import { Sale } from './sale.model';
 
 @Table({
     engine: 'InnoDB',
@@ -38,4 +39,7 @@ export class ServiceStatus extends Model<ServiceStatus> {
 
     @HasMany(() => Application)
     applications: Application[]
+
+    @HasMany(() => Sale)
+    sales: Sale[]
 }

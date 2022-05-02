@@ -1,16 +1,16 @@
-import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
-import { ModuloVsRole } from './modulo-vs-role.model';
-import { Permission } from './permission.model';
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { Modulo } from './modulo.model';
+import { RoleVsPermiso } from './role-vs-permiso.model';
 
 @Table({
     engine: 'InnoDB',
-    initialAutoIncrement: '11',
+    initialAutoIncrement: '72',
     charset: 'utf8mb4',
     collate: 'utf8mb4_unicode_ci',
     timestamps: false,
-    tableName: 'modulos'
+    tableName: 'roles'
 })
-export class Modulo extends Model<Modulo> {
+export class Permission extends Model<Permission> {
     @Column({
         type: DataType.BIGINT({ length: 20 }).UNSIGNED,
         allowNull: false,
@@ -23,7 +23,7 @@ export class Modulo extends Model<Modulo> {
         type: 'VARCHAR(255) COLLATE utf8mb4_unicode_ci',
         allowNull: false
     })
-    module_name: string;
+    description: string;
 
     @Column({
         type: 'VARCHAR(255) COLLATE utf8mb4_unicode_ci',
@@ -35,22 +35,29 @@ export class Modulo extends Model<Modulo> {
         type: 'VARCHAR(255) COLLATE utf8mb4_unicode_ci',
         defaultValue: null
     })
-    icono: string;
+    metodo: string;
 
     @Column({
-        type: 'VARCHAR(255) COLLATE utf8mb4_unicode_ci',
-        defaultValue: null
+        type: DataType.TINYINT({ length: 1 }),
+        defaultValue: null,
     })
-    padre: string;
+    identico: number
 
+    @ForeignKey(() => Modulo)
     @Column({
-        type: 'VARCHAR(255) COLLATE utf8mb4_unicode_ci',
-        defaultValue: null
+        type: DataType.BIGINT({ length: 20 }).UNSIGNED,
+        allowNull: false
     })
-    fondo: string;
+    idModulo: bigint;
+
+    @BelongsTo(() => Modulo, {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    modulo: Modulo
 
     @Column({
-        type: DataType.TINYINT({length: 1}),
+        type: DataType.TINYINT({ length: 1 }),
         defaultValue: 1,
     })
     status: number
@@ -67,9 +74,6 @@ export class Modulo extends Model<Modulo> {
     })
     updated_at: number;
 
-    @HasMany(() => Permission)
-    permissions: Permission[]
-
-    @HasMany(() => ModuloVsRole)
-    moduloVsRole: ModuloVsRole[]
+    @HasMany(() => RoleVsPermiso)
+    roleVsPermiso: RoleVsPermiso
 }
