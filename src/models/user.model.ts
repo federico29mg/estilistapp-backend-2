@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 import { Application } from './application.model';
 import { Calendar } from './calendar.model';
@@ -24,48 +25,56 @@ export class User extends Model<User> {
         autoIncrement: true,
         primaryKey: true
     })
+    @ApiProperty()
     id: bigint;
 
     @Column({
         type: 'VARCHAR(60) COLLATE utf8mb4_unicode_ci',
         defaultValue: null
     })
+    @ApiProperty()
     name: string;
 
     @Column({
         type: 'VARCHAR(60) COLLATE utf8mb4_unicode_ci',
         defaultValue: null
     })
+    @ApiProperty()
     email: string;
 
     @Column({
         type: 'VARCHAR(10) COLLATE utf8mb4_unicode_ci',
         defaultValue: null
     })
+    @ApiProperty()
     phone: string;
 
     @Column({
         type: 'VARCHAR(80) COLLATE utf8mb4_unicode_ci',
         defaultValue: null
     })
+    @ApiProperty()
     direction: string;
 
     @Column({
         type: 'VARCHAR(255) COLLATE utf8mb4_unicode_ci',
         allowNull: false
     })
+    @ApiProperty()
     password: string;
 
     @Column({
         type: DataType.TINYINT({length: 1}),
         defaultValue: 1,
     })
+    @ApiProperty()
     status: number
 
     @Column({
         type: 'VARCHAR(100) COLLATE utf8mb4_unicode_ci',
         defaultValue: null
     })
+    @ApiProperty()
     remember_token: string;
 
     @ForeignKey(() => Role)
@@ -73,6 +82,7 @@ export class User extends Model<User> {
         type: DataType.BIGINT({ length: 20 }).UNSIGNED,
         allowNull: false,
     })
+    @ApiProperty()
     idRol: bigint;
 
     @BelongsTo(() => Role)

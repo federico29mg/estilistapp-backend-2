@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Get, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from 'src/models/user.model';
 import { CreateUserDto } from '../dtos/create-user.dto';
@@ -29,5 +29,9 @@ export class UsersService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  async findWithMailPass(email: string, password: string): Promise<User> {
+    return this.userModel.findOne({where: {email, password}})
   }
 }
